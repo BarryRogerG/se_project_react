@@ -1,3 +1,69 @@
 .header {
-  /* Header styles will be added here */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: "Cabinet Grotesk", sans-serif;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header__date-location {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__add-clothes-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 14px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.header__add-clothes-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__username {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+}
+
+.header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
 }
