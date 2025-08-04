@@ -1,12 +1,15 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
+  width: calc(100% - 80px);
   height: 40px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  margin: 32px 40px 0 40px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: "Cabinet Grotesk", sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 0 24px;
 }
 
 .header__left {
@@ -16,9 +19,10 @@
 }
 
 .header__logo {
-  height: 24px;
-  width: auto;
+  width: 89px;
+  height: 40px;
   object-fit: contain;
+  display: block;
 }
 
 .header__date-location {

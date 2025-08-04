@@ -4,7 +4,7 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <p>© 2024 WTWR</p>
+      {/* Footer content will be added here */}
     </footer>
   );
 }

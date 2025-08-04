@@ -8,6 +8,11 @@ import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [weatherData, setWeatherData] = useState({
+    temperature: 75,
+    location: "New York",
+    condition: "sunny",
+  });
 
   const handleAddClothesClick = () => {
     setIsModalOpen(true);
@@ -19,8 +24,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Main />
+      <Header onAddClothesClick={handleAddClothesClick} />
+      <Main weatherData={weatherData} />
       <Footer />
       <ModalWithForm isOpen={isModalOpen} onClose={handleCloseModal} />
       <ItemModal />
