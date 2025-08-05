@@ -1,28 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ModalWithForm.css";
 
-function ModalWithForm({ isOpen, onClose }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    weather: "hot",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    onClose();
-  };
-
+function ModalWithForm({ isOpen, onClose, formData, onInputChange, onSubmit }) {
   if (!isOpen) return null;
 
   return (
@@ -35,7 +14,7 @@ function ModalWithForm({ isOpen, onClose }) {
           </button>
         </div>
 
-        <form className="modal__form" onSubmit={handleSubmit}>
+        <form className="modal__form" onSubmit={onSubmit}>
           <div className="modal__input-group">
             <label htmlFor="name" className="modal__label">
               Name
@@ -47,7 +26,7 @@ function ModalWithForm({ isOpen, onClose }) {
               className="modal__input"
               placeholder="Name"
               value={formData.name}
-              onChange={handleInputChange}
+              onChange={onInputChange}
               required
             />
           </div>
@@ -63,7 +42,7 @@ function ModalWithForm({ isOpen, onClose }) {
               className="modal__input"
               placeholder="Image URL"
               value={formData.image}
-              onChange={handleInputChange}
+              onChange={onInputChange}
               required
             />
           </div>
@@ -77,7 +56,7 @@ function ModalWithForm({ isOpen, onClose }) {
                   name="weather"
                   value="hot"
                   checked={formData.weather === "hot"}
-                  onChange={handleInputChange}
+                  onChange={onInputChange}
                   className="modal__radio"
                 />
                 <span className="modal__radio-text">Hot</span>
@@ -89,7 +68,7 @@ function ModalWithForm({ isOpen, onClose }) {
                   name="weather"
                   value="warm"
                   checked={formData.weather === "warm"}
-                  onChange={handleInputChange}
+                  onChange={onInputChange}
                   className="modal__radio"
                 />
                 <span className="modal__radio-text">Warm</span>
@@ -101,7 +80,7 @@ function ModalWithForm({ isOpen, onClose }) {
                   name="weather"
                   value="cold"
                   checked={formData.weather === "cold"}
-                  onChange={handleInputChange}
+                  onChange={onInputChange}
                   className="modal__radio"
                 />
                 <span className="modal__radio-text">Cold</span>
