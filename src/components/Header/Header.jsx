@@ -3,7 +3,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
 
-function Header() {
+function Header({ onAddClothesClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -17,7 +17,9 @@ function Header() {
       </div>
 
       <div className="header__right">
-        <button className="header__add-clothes-btn">+ Add clothes</button>
+        <button className="header__add-clothes-btn" onClick={onAddClothesClick}>
+          + Add clothes
+        </button>
         <div className="header__user">
           <p className="header__username">Terrence Tegegne</p>
           <img

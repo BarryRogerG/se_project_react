@@ -1,7 +1,8 @@
 import React from "react";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { clothingItems } from "../../utils/constants";
+import { defaultClothingItems } from "../../utils/constants";
+import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData }) {
   return (
@@ -15,16 +16,9 @@ function Main({ weatherData }) {
           Today is {weatherData.temperature}° F / You may want to wear:
         </p>
 
-        <ul className="main__clothing-cards">
-          {clothingItems.map((item) => (
-            <li key={item.id} className="main__clothing-card">
-              <img
-                src={item.image}
-                alt={item.alt}
-                className="main__clothing-card-image"
-              />
-              <p className="main__clothing-card-name">{item.name}</p>
-            </li>
+        <ul className="cards_list">
+          {defaultClothingItems.map((item) => (
+            <ItemCard key={item._id} item={item} />
           ))}
         </ul>
       </div>
