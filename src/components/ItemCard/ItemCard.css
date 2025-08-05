@@ -10,10 +10,13 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
   overflow: hidden;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card_name {
@@ -30,6 +33,7 @@
   border-radius: 4px;
   padding: 8px 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 .card_image {
@@ -37,4 +41,5 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  pointer-events: none;
 }

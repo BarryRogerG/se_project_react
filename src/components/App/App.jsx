@@ -8,6 +8,8 @@ import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [weatherData, setWeatherData] = useState({
     temperature: 75,
     location: "New York",
@@ -27,6 +29,19 @@ function App() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  // ItemModal handlers
+  const handleItemClick = (item) => {
+    console.log("handleItemClick called with:", item);
+    setSelectedItem(item);
+    setIsItemModalOpen(true);
+    console.log("Modal should now be open");
+  };
+
+  const handleCloseItemModal = () => {
+    setIsItemModalOpen(false);
+    setSelectedItem(null);
   };
 
   // Form handlers moved from ModalWithForm
@@ -54,7 +69,7 @@ function App() {
   return (
     <div className="App">
       <Header onAddClothesClick={handleAddClothesClick} />
-      <Main weatherData={weatherData} />
+      <Main weatherData={weatherData} onItemClick={handleItemClick} />
       <Footer />
       <ModalWithForm
         isOpen={isModalOpen}
@@ -63,7 +78,11 @@ function App() {
         onInputChange={handleInputChange}
         onSubmit={handleSubmit}
       />
-      <ItemModal />
+      <ItemModal
+        isOpen={isItemModalOpen}
+        onClose={handleCloseItemModal}
+        item={selectedItem}
+      />
     </div>
   );
 }
