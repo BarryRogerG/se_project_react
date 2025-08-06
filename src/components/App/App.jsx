@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import { fetchWeatherData } from "../../utils/weatherApi";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,8 +13,8 @@ function App() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [weatherData, setWeatherData] = useState({
     temperature: 75,
-    location: "New York",
-    condition: "sunny",
+    location: "Tel Aviv-Yafo",
+    condition: "warm",
   });
 
   // Form data state moved from ModalWithForm
@@ -22,6 +23,25 @@ function App() {
     image: "",
     weather: "hot",
   });
+
+  // Fetch weather data when component mounts
+  useEffect(() => {
+    const getWeatherData = async () => {
+      try {
+        const weather = await fetchWeatherData();
+        setWeatherData({
+          temperature: weather.temperature,
+          location: weather.city,
+          condition: weather.weatherType,
+        });
+      } catch (error) {
+        console.error("Failed to fetch weather data:", error);
+        // Keep default weather data if API fails
+      }
+    };
+
+    getWeatherData();
+  }, []);
 
   const handleAddClothesClick = () => {
     setIsModalOpen(true);

@@ -5,6 +5,11 @@ import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
 function Main({ weatherData, onItemClick }) {
+  // Filter clothing items based on current weather type
+  const filteredClothingItems = defaultClothingItems.filter(
+    (item) => item.weather === weatherData.condition
+  );
+
   return (
     <main className="main">
       <div className="main__weather-section">
@@ -17,7 +22,7 @@ function Main({ weatherData, onItemClick }) {
         </p>
 
         <ul className="cards_list">
-          {defaultClothingItems.map((item) => (
+          {filteredClothingItems.map((item) => (
             <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
           ))}
         </ul>
