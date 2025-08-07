@@ -19,7 +19,7 @@ WTWR is a weather-based clothing recommendation application that helps users cho
 - **JavaScript (ES6+)**: Modern JavaScript features including async/await
 - **CSS3**: Custom styling with BEM methodology
 - **OpenWeatherMap API**: Real-time weather data integration
-- **Vite**: Build tool and development server
+- **Vite 5.0.8**: Build tool and development server (as required by project specifications)
 - **Cabinet Grotesk Font**: Custom typography
 - **Responsive Design**: Mobile-first approach
 
