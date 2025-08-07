@@ -2,11 +2,8 @@ import "./ItemCard.css";
 
 function ItemCard({ item, onItemClick }) {
   const handleClick = () => {
-    console.log("ItemCard clicked:", item);
     if (onItemClick) {
       onItemClick(item);
-    } else {
-      console.log("onItemClick is not defined");
     }
   };
 

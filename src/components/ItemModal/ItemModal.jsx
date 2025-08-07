@@ -2,10 +2,7 @@ import React from "react";
 import "./ItemModal.css";
 
 function ItemModal({ isOpen, onClose, item }) {
-  console.log("ItemModal render - isOpen:", isOpen, "item:", item);
-
   if (!isOpen || !item) {
-    console.log("ItemModal not rendering - isOpen:", isOpen, "item:", item);
     return null;
   }
 

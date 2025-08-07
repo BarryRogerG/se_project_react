@@ -59,7 +59,6 @@ const isDayTime = (currentTime, sunrise, sunset) => {
 // Function to extract needed data from API response
 const extractWeatherData = (apiResponse) => {
   const cityName = apiResponse.name;
-  console.log("API returned city name:", cityName); // Debug log
   const temperature = Math.round(apiResponse.main.temp);
   const weatherType = getWeatherType(temperature);
   const weatherCode = apiResponse.weather[0].id;

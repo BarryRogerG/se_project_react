@@ -8,6 +8,7 @@ import rainDay from "../../assets/day/rain.png";
 import stormDay from "../../assets/day/storm.png";
 import snowDay from "../../assets/day/snow.png";
 import fogDay from "../../assets/day/fog.png";
+import defaultDay from "../../assets/day/default.png";
 
 // Night weather backgrounds
 import sunnyNight from "../../assets/night/clear.png"; // Fixed: clear.png instead of sunny.png
@@ -16,9 +17,7 @@ import rainNight from "../../assets/night/rain.png";
 import stormNight from "../../assets/night/storm.png";
 import snowNight from "../../assets/night/snow.png";
 import fogNight from "../../assets/night/fog.png";
-
-// Default fallback
-import sunny from "../../assets/day/sunny.png"; // Fixed: use day/sunny.png as fallback
+import defaultNight from "../../assets/night/default.png";
 
 function WeatherCard({ weatherData }) {
   // Function to get the appropriate background image based on weather condition and time
@@ -41,7 +40,7 @@ function WeatherCard({ weatherData }) {
         case "fog":
           return fogDay;
         default:
-          return sunnyDay;
+          return defaultDay;
       }
     }
     // Night weather conditions
@@ -60,7 +59,7 @@ function WeatherCard({ weatherData }) {
         case "fog":
           return fogNight;
         default:
-          return sunnyNight;
+          return defaultNight;
       }
     }
   };

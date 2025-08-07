@@ -55,10 +55,8 @@ function App() {
 
   // ItemModal handlers
   const handleItemClick = (item) => {
-    console.log("handleItemClick called with:", item);
     setSelectedItem(item);
     setIsItemModalOpen(true);
-    console.log("Modal should now be open");
   };
 
   const handleCloseItemModal = () => {
@@ -78,7 +76,6 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
-    console.log("Form submitted:", formData);
     handleCloseModal();
     // Reset form data
     setFormData({
