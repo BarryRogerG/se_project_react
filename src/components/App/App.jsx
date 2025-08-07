@@ -33,6 +33,8 @@ function App() {
           temperature: weather.temperature,
           location: weather.city,
           condition: weather.weatherType,
+          weatherCondition: weather.weatherCondition,
+          isDay: weather.isDay,
         });
       } catch (error) {
         console.error("Failed to fetch weather data:", error);
@@ -88,7 +90,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header onAddClothesClick={handleAddClothesClick} />
+      <Header
+        onAddClothesClick={handleAddClothesClick}
+        location={weatherData.location}
+      />
       <Main weatherData={weatherData} onItemClick={handleItemClick} />
       <Footer />
       <ModalWithForm

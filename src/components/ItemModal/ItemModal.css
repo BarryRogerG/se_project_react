@@ -20,7 +20,6 @@
   overflow-y: auto;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
 }
 
 .item-modal__close-btn {
@@ -32,7 +31,7 @@
   font-size: 20px;
   cursor: pointer;
   color: #666;
-  padding: 4px;
+
   border-radius: 4px;
   transition: background-color 0.2s;
   z-index: 10;
@@ -45,8 +44,9 @@
 .item-modal__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
+  padding-left: 32px;
 }
 
 .item-modal__image {
@@ -55,21 +55,28 @@
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  align-self: center;
 }
 
 .item-modal__title {
   font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  color: #333;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: black;
   margin: 0;
+  align-self: flex-start;
 }
 
 .item-modal__weather {
   font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #666;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #000000;
   margin: 0;
   text-transform: capitalize;
+  align-self: flex-start;
 }

@@ -10,30 +10,28 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
   overflow: hidden;
-  cursor: pointer;
-  pointer-events: auto;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card_name {
   font-family: "Cabinet Grotesk", sans-serif;
   font-size: 16px;
   font-weight: 700;
+  line-height: 20px;
   color: #333;
   margin: 0;
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
   background: white;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 2px 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  pointer-events: none;
 }
 
 .card_image {
@@ -41,5 +39,4 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  pointer-events: none;
 }

@@ -3,7 +3,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
 
-function Header({ onAddClothesClick }) {
+function Header({ onAddClothesClick, location }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -13,7 +13,9 @@ function Header({ onAddClothesClick }) {
     <header className="header">
       <div className="header__left">
         <img className="header__logo" src={logo} alt="WTWR Logo" />
-        <p className="header__date-location">{currentDate}, New York</p>
+        <p className="header__date-location">
+          {currentDate}, {location}
+        </p>
       </div>
 
       <div className="header__right">
