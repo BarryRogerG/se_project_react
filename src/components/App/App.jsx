@@ -96,10 +96,84 @@ function App() {
       <ModalWithForm
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        formData={formData}
-        onInputChange={handleInputChange}
+        title="New garment"
+        name="add-garment"
+        buttonText="Add garment"
         onSubmit={handleSubmit}
-      />
+      >
+        <div className="modal__input-group">
+          <label htmlFor="name" className="modal__label">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="modal__input"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="modal__input-group">
+          <label htmlFor="image" className="modal__label">
+            Image
+          </label>
+          <input
+            type="url"
+            id="image"
+            name="image"
+            className="modal__input"
+            placeholder="Image URL"
+            value={formData.image}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="modal__weather-section">
+          <p className="modal__weather-title">Select the weather type:</p>
+          <div className="modal__radio-group">
+            <label className="modal__radio-label">
+              <input
+                type="radio"
+                name="weather"
+                value="hot"
+                checked={formData.weather === "hot"}
+                onChange={handleInputChange}
+                className="modal__radio"
+              />
+              <span className="modal__radio-text">Hot</span>
+            </label>
+
+            <label className="modal__radio-label">
+              <input
+                type="radio"
+                name="weather"
+                value="warm"
+                checked={formData.weather === "warm"}
+                onChange={handleInputChange}
+                className="modal__radio"
+              />
+              <span className="modal__radio-text">Warm</span>
+            </label>
+
+            <label className="modal__radio-label">
+              <input
+                type="radio"
+                name="weather"
+                value="cold"
+                checked={formData.weather === "cold"}
+                onChange={handleInputChange}
+                className="modal__radio"
+              />
+              <span className="modal__radio-text">Cold</span>
+            </label>
+          </div>
+        </div>
+      </ModalWithForm>
       <ItemModal
         isOpen={isItemModalOpen}
         onClose={handleCloseItemModal}

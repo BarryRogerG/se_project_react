@@ -41,6 +41,12 @@
   background-color: #f0f0f0;
 }
 
+.item-modal__close-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .item-modal__content {
   display: flex;
   flex-direction: column;

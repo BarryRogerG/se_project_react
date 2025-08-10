@@ -19,7 +19,11 @@ function Header({ onAddClothesClick, location }) {
       </div>
 
       <div className="header__right">
-        <button className="header__add-clothes-btn" onClick={onAddClothesClick}>
+        <button
+          type="button"
+          className="header__add-clothes-btn"
+          onClick={onAddClothesClick}
+        >
           + Add clothes
         </button>
         <div className="header__user">

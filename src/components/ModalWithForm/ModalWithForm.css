@@ -53,6 +53,12 @@
   background-color: #f0f0f0;
 }
 
+.modal__close-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
