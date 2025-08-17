@@ -65,3 +65,35 @@ export const getWeatherBackground = (weatherData) => {
     }
   }
 };
+
+/**
+ * Convert Fahrenheit to Celsius
+ * @param {number} fahrenheit - Temperature in Fahrenheit
+ * @returns {number} - Temperature in Celsius
+ */
+export const fahrenheitToCelsius = (fahrenheit) => {
+  return Math.round(((fahrenheit - 32) * 5) / 9);
+};
+
+/**
+ * Convert Celsius to Fahrenheit
+ * @param {number} celsius - Temperature in Celsius
+ * @returns {number} - Temperature in Fahrenheit
+ */
+export const celsiusToFahrenheit = (celsius) => {
+  return Math.round((celsius * 9) / 5 + 32);
+};
+
+/**
+ * Format temperature based on unit preference
+ * @param {number} temperature - Temperature value
+ * @param {boolean} isCelsius - Whether to display in Celsius
+ * @returns {string} - Formatted temperature string
+ */
+export const formatTemperature = (temperature, isCelsius) => {
+  if (isCelsius) {
+    const celsius = fahrenheitToCelsius(temperature);
+    return `${celsius}°C`;
+  }
+  return `${temperature}°F`;
+};

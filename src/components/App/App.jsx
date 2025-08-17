@@ -16,6 +16,7 @@ function App() {
     location: "Tel Aviv-Yafo",
     condition: "warm",
   });
+  const [isCelsius, setIsCelsius] = useState(false);
 
   // Form data state moved from ModalWithForm
   const [formData, setFormData] = useState({
@@ -85,13 +86,23 @@ function App() {
     });
   };
 
+  const handleToggleUnit = () => {
+    setIsCelsius(!isCelsius);
+  };
+
   return (
     <div className="App">
       <Header
         onAddClothesClick={handleAddClothesClick}
         location={weatherData.location}
+        isCelsius={isCelsius}
+        onToggleUnit={handleToggleUnit}
       />
-      <Main weatherData={weatherData} onItemClick={handleItemClick} />
+      <Main
+        weatherData={weatherData}
+        onItemClick={handleItemClick}
+        isCelsius={isCelsius}
+      />
       <Footer />
       <ModalWithForm
         isOpen={isModalOpen}

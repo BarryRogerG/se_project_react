@@ -2,8 +2,9 @@ import React from "react";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
+import ToggleSwitch from "../App/ToggleSwitch/ToggleSwitch";
 
-function Header({ onAddClothesClick, location }) {
+function Header({ onAddClothesClick, location, isCelsius, onToggleUnit }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -19,6 +20,7 @@ function Header({ onAddClothesClick, location }) {
       </div>
 
       <div className="header__right">
+        <ToggleSwitch isChecked={isCelsius} onToggle={onToggleUnit} />
         <button
           type="button"
           className="header__add-clothes-btn"

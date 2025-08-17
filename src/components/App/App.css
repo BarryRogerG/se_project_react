@@ -1,23 +1,15 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Cabinet Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", sans-serif;
-  background: #ffffff;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  /* App styles will be added here */
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import "../../vendor/normalize.css";
+@import "../../vendor/fonts.css";
 
 .page {
   background-color: #f3f3f3;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.page__content {
+  max-width: 1360px;
+  margin: 0 auto;
 }

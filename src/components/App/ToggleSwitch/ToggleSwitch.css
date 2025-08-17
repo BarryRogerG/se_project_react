@@ -1,0 +1,82 @@
+.toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.toggle-switch__input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch__label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 56px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px solid #d1d5db;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.toggle-switch__text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #666;
+  transition: color 0.3s ease;
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.toggle-switch__text--f {
+  color: #fff;
+  left: 10px;
+}
+
+.toggle-switch__text--c {
+  color: #666;
+  right: 10px;
+}
+
+.toggle-switch__slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  background-color: #000;
+  border-radius: 14px;
+  transition: transform 0.7s ease;
+  z-index: 1;
+}
+
+/* When checked (Celsius selected) */
+.toggle-switch__input:checked + .toggle-switch__label .toggle-switch__slider {
+  transform: translateX(28px);
+}
+
+.toggle-switch__input:checked + .toggle-switch__label .toggle-switch__text--f {
+  color: #666;
+}
+
+.toggle-switch__input:checked + .toggle-switch__label .toggle-switch__text--c {
+  color: #fff;
+}
+
+/* Hover effects */
+.toggle-switch__label:hover {
+  background-color: #f9f9f9;
+}
+
+.toggle-switch__label:hover .toggle-switch__slider {
+  background-color: #333;
+}
