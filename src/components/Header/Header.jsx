@@ -4,7 +4,12 @@ import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
 import ToggleSwitch from "../App/ToggleSwitch/ToggleSwitch";
 
-function Header({ onAddClothesClick, location, isCelsius, onToggleUnit }) {
+function Header({
+  onAddClothesClick,
+  location,
+  currentTemperatureUnit,
+  onToggleSwitchChange,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -20,7 +25,10 @@ function Header({ onAddClothesClick, location, isCelsius, onToggleUnit }) {
       </div>
 
       <div className="header__right">
-        <ToggleSwitch isChecked={isCelsius} onToggle={onToggleUnit} />
+        <ToggleSwitch
+          isChecked={currentTemperatureUnit === "C"}
+          onToggle={onToggleSwitchChange}
+        />
         <button
           type="button"
           className="header__add-clothes-btn"

@@ -3,27 +3,25 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { fetchWeatherData } from "../../utils/weatherApi";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [weatherData, setWeatherData] = useState({
-    temperature: 75,
+    temperature: {
+      F: 75,
+      C: 24,
+    },
     location: "Tel Aviv-Yafo",
     condition: "warm",
   });
-  const [isCelsius, setIsCelsius] = useState(false);
-
-  // Form data state moved from ModalWithForm
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    weather: "hot",
-  });
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
 
   // Fetch weather data when component mounts
   useEffect(() => {
@@ -65,131 +63,50 @@ function App() {
     setSelectedItem(null);
   };
 
-  // Form handlers moved from ModalWithForm
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    // update clothingItems array
+    setClothingItems([{ name, link: imageUrl, weather }, ...clothingItems]);
+    // close the modal
     handleCloseModal();
-    // Reset form data
-    setFormData({
-      name: "",
-      image: "",
-      weather: "hot",
-    });
   };
 
-  const handleToggleUnit = () => {
-    setIsCelsius(!isCelsius);
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit((prevUnit) => {
+      const newUnit = prevUnit === "F" ? "C" : "F";
+      console.log("Temperature unit changed from", prevUnit, "to", newUnit);
+      return newUnit;
+    });
   };
 
   return (
     <div className="App">
-      <Header
-        onAddClothesClick={handleAddClothesClick}
-        location={weatherData.location}
-        isCelsius={isCelsius}
-        onToggleUnit={handleToggleUnit}
-      />
-      <Main
-        weatherData={weatherData}
-        onItemClick={handleItemClick}
-        isCelsius={isCelsius}
-      />
-      <Footer />
-      <ModalWithForm
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title="New garment"
-        name="add-garment"
-        buttonText="Add garment"
-        onSubmit={handleSubmit}
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        <div className="modal__input-group">
-          <label htmlFor="name" className="modal__label">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="modal__input"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="modal__input-group">
-          <label htmlFor="image" className="modal__label">
-            Image
-          </label>
-          <input
-            type="url"
-            id="image"
-            name="image"
-            className="modal__input"
-            placeholder="Image URL"
-            value={formData.image}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="modal__weather-section">
-          <p className="modal__weather-title">Select the weather type:</p>
-          <div className="modal__radio-group">
-            <label className="modal__radio-label">
-              <input
-                type="radio"
-                name="weather"
-                value="hot"
-                checked={formData.weather === "hot"}
-                onChange={handleInputChange}
-                className="modal__radio"
-              />
-              <span className="modal__radio-text">Hot</span>
-            </label>
-
-            <label className="modal__radio-label">
-              <input
-                type="radio"
-                name="weather"
-                value="warm"
-                checked={formData.weather === "warm"}
-                onChange={handleInputChange}
-                className="modal__radio"
-              />
-              <span className="modal__radio-text">Warm</span>
-            </label>
-
-            <label className="modal__radio-label">
-              <input
-                type="radio"
-                name="weather"
-                value="cold"
-                checked={formData.weather === "cold"}
-                onChange={handleInputChange}
-                className="modal__radio"
-              />
-              <span className="modal__radio-text">Cold</span>
-            </label>
-          </div>
-        </div>
-      </ModalWithForm>
-      <ItemModal
-        isOpen={isItemModalOpen}
-        onClose={handleCloseItemModal}
-        item={selectedItem}
-      />
+        <Header
+          onAddClothesClick={handleAddClothesClick}
+          location={weatherData.location}
+          currentTemperatureUnit={currentTemperatureUnit}
+          onToggleSwitchChange={handleToggleSwitchChange}
+        />
+        <Main
+          weatherData={weatherData}
+          onItemClick={handleItemClick}
+          currentTemperatureUnit={currentTemperatureUnit}
+          clothingItems={clothingItems}
+        />
+        <Footer />
+        <AddItemModal
+          isOpen={isModalOpen}
+          onAddItem={handleAddItemModalSubmit}
+          onCloseModal={handleCloseModal}
+        />
+        <ItemModal
+          isOpen={isItemModalOpen}
+          onClose={handleCloseItemModal}
+          item={selectedItem}
+        />
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }

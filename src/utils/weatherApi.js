@@ -59,8 +59,9 @@ const isDayTime = (currentTime, sunrise, sunset) => {
 // Function to extract needed data from API response
 const extractWeatherData = (apiResponse) => {
   const cityName = apiResponse.name;
-  const temperature = Math.round(apiResponse.main.temp);
-  const weatherType = getWeatherType(temperature);
+  const temperatureF = Math.round(apiResponse.main.temp);
+  const temperatureC = Math.round(((temperatureF - 32) * 5) / 9);
+  const weatherType = getWeatherType(temperatureF);
   const weatherCode = apiResponse.weather[0].id;
   const weatherCondition = getWeatherCondition(weatherCode);
   const sunrise = apiResponse.sys.sunrise;
@@ -70,7 +71,10 @@ const extractWeatherData = (apiResponse) => {
 
   return {
     city: cityName,
-    temperature: temperature,
+    temperature: {
+      F: temperatureF,
+      C: temperatureC,
+    },
     weatherType: weatherType,
     weatherCondition: weatherCondition,
     isDay: isDay,
@@ -97,7 +101,10 @@ export const fetchWeatherData = async () => {
     // Return fallback data if API fails
     return {
       city: "Tel Aviv-Yafo",
-      temperature: 75,
+      temperature: {
+        F: 75,
+        C: 24,
+      },
       weatherType: "warm",
       weatherCondition: "sunny",
       isDay: true,
