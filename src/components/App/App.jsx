@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
@@ -89,12 +91,29 @@ function App() {
           currentTemperatureUnit={currentTemperatureUnit}
           onToggleSwitchChange={handleToggleSwitchChange}
         />
-        <Main
-          weatherData={weatherData}
-          onItemClick={handleItemClick}
-          currentTemperatureUnit={currentTemperatureUnit}
-          clothingItems={clothingItems}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                weatherData={weatherData}
+                onItemClick={handleItemClick}
+                currentTemperatureUnit={currentTemperatureUnit}
+                clothingItems={clothingItems}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                clothingItems={clothingItems}
+                onAddItem={handleAddClothesClick}
+                onItemClick={handleItemClick}
+              />
+            }
+          />
+        </Routes>
         <Footer />
         <AddItemModal
           isOpen={isModalOpen}
