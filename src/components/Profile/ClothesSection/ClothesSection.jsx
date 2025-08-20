@@ -20,7 +20,7 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
       <div className="clothes-section__items">
         {/* Display user's added clothing items first */}
         {clothingItems.map((item, index) => (
-          <ItemCard
+          <ItemCards
             key={`user-${item.name}-${index}`}
             item={item}
             onItemClick={onItemClick}
