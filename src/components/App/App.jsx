@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { fetchWeatherData } from "../../utils/weatherApi";
+import { getClothingItems } from "../../utils/api";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
@@ -44,6 +45,23 @@ function App() {
     };
 
     getWeatherData();
+  }, []);
+
+  // Fetch clothing items from server when component mounts
+  useEffect(() => {
+    console.log("App component mounted, fetching clothing items...");
+    const fetchClothingItems = async () => {
+      try {
+        const items = await getClothingItems();
+        console.log("Setting clothing items in state:", items.length, "items");
+        setClothingItems(items);
+      } catch (error) {
+        console.error("Failed to fetch clothing items:", error);
+        // Keep empty array if API fails
+      }
+    };
+
+    fetchClothingItems();
   }, []);
 
   const handleAddClothesClick = () => {

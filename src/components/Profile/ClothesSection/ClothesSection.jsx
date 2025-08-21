@@ -1,7 +1,6 @@
 import React from "react";
 import "./ClothesSection.css";
 import ItemCard from "../../ItemCard/ItemCard";
-import { defaultClothingItems } from "../../../utils/constants";
 
 function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
   return (
@@ -18,18 +17,9 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
       </div>
 
       <div className="clothes-section__items">
-        {/* Display user's added clothing items first */}
         {clothingItems.map((item, index) => (
-          <ItemCards
-            key={`user-${item.name}-${index}`}
-            item={item}
-            onItemClick={onItemClick}
-          />
-        ))}
-        {/* Display default clothing items */}
-        {defaultClothingItems.map((item) => (
           <ItemCard
-            key={`default-${item._id}`}
+            key={item._id || index}
             item={item}
             onItemClick={onItemClick}
           />

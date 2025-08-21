@@ -19,7 +19,11 @@ function ItemModal({ isOpen, onClose, item }) {
         </button>
 
         <div className="item-modal__content">
-          <img className="item-modal__image" src={item.link} alt={item.name} />
+          <img
+            className="item-modal__image"
+            src={item.imageUrl || item.link}
+            alt={item.name}
+          />
           <h2 className="item-modal__title">{item.name}</h2>
           <p className="item-modal__weather">Weather: {item.weather}</p>
         </div>
