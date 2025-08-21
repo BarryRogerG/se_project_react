@@ -8,7 +8,11 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { fetchWeatherData } from "../../utils/weatherApi";
-import { getClothingItems } from "../../utils/api";
+import {
+  getClothingItems,
+  addClothingItem,
+  deleteClothingItem,
+} from "../../utils/api";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
@@ -49,11 +53,9 @@ function App() {
 
   // Fetch clothing items from server when component mounts
   useEffect(() => {
-    console.log("App component mounted, fetching clothing items...");
     const fetchClothingItems = async () => {
       try {
         const items = await getClothingItems();
-        console.log("Setting clothing items in state:", items.length, "items");
         setClothingItems(items);
       } catch (error) {
         console.error("Failed to fetch clothing items:", error);
@@ -83,11 +85,38 @@ function App() {
     setSelectedItem(null);
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    // update clothingItems array
-    setClothingItems([{ name, link: imageUrl, weather }, ...clothingItems]);
-    // close the modal
-    handleCloseModal();
+  const handleAddItemModalSubmit = async ({ name, imageUrl, weather }) => {
+    try {
+      // Add the new item to the server
+      const newItem = await addClothingItem({ name, imageUrl, weather });
+
+      // Update local state with the new item from server
+      setClothingItems([newItem, ...clothingItems]);
+
+      // Close the modal
+      handleCloseModal();
+    } catch (error) {
+      console.error("Failed to add item:", error);
+      // You could add error handling here (show error message to user)
+    }
+  };
+
+  const handleDeleteItem = async (itemId) => {
+    try {
+      // Delete the item from the server
+      await deleteClothingItem(itemId);
+
+      // Remove the item from local state
+      setClothingItems(clothingItems.filter((item) => item.id !== itemId));
+
+      // Close the item modal if it's open
+      if (isItemModalOpen) {
+        handleCloseItemModal();
+      }
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+      // You could add error handling here (show error message to user)
+    }
   };
 
   const handleToggleSwitchChange = () => {
@@ -142,6 +171,7 @@ function App() {
           isOpen={isItemModalOpen}
           onClose={handleCloseItemModal}
           item={selectedItem}
+          onDelete={handleDeleteItem}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>

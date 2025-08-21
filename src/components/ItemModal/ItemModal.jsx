@@ -2,7 +2,7 @@ import React from "react";
 import "./ItemModal.css";
 import closeIcon from "../../assets/close.png";
 
-function ItemModal({ isOpen, onClose, item }) {
+function ItemModal({ isOpen, onClose, item, onDelete }) {
   if (!isOpen || !item) {
     return null;
   }
@@ -26,6 +26,13 @@ function ItemModal({ isOpen, onClose, item }) {
           />
           <h2 className="item-modal__title">{item.name}</h2>
           <p className="item-modal__weather">Weather: {item.weather}</p>
+          <button
+            type="button"
+            className="item-modal__delete-btn"
+            onClick={() => onDelete(item.id)}
+          >
+            Delete garment
+          </button>
         </div>
       </div>
     </div>
