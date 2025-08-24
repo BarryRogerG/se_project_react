@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
-import ToggleSwitch from "../App/ToggleSwitch/ToggleSwitch";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({
   onAddClothesClick,

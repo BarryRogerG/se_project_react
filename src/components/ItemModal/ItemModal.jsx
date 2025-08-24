@@ -1,6 +1,5 @@
 import React from "react";
 import "./ItemModal.css";
-import closeIcon from "../../assets/close.png";
 
 function ItemModal({ isOpen, onClose, item, onDelete }) {
   if (!isOpen || !item) {
@@ -15,7 +14,7 @@ function ItemModal({ isOpen, onClose, item, onDelete }) {
           className="item-modal__close-btn"
           onClick={onClose}
         >
-          <img src={closeIcon} alt="Close" className="item-modal__close-icon" />
+          ×
         </button>
 
         <div className="item-modal__content">

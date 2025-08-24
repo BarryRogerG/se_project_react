@@ -1,4 +1,5 @@
 import { WEATHER_API_KEY, WEATHER_COORDS } from "./constants.js";
+import { handleApiResponse } from "./api.js";
 
 // Function to determine weather type based on temperature
 const getWeatherType = (temperature) => {
@@ -84,31 +85,12 @@ const extractWeatherData = (apiResponse) => {
 
 // Main function to fetch weather data
 export const fetchWeatherData = async () => {
-  try {
-    const { latitude, longitude } = WEATHER_COORDS;
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${WEATHER_API_KEY}`;
+  const { latitude, longitude } = WEATHER_COORDS;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${WEATHER_API_KEY}`;
 
-    const response = await fetch(url);
+  const response = await fetch(url);
+  const validResponse = handleApiResponse(response);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return extractWeatherData(data);
-  } catch (error) {
-    console.error("Error fetching weather data:", error);
-    // Return fallback data if API fails
-    return {
-      city: "Tel Aviv-Yafo",
-      temperature: {
-        F: 75,
-        C: 24,
-      },
-      weatherType: "warm",
-      weatherCondition: "sunny",
-      isDay: true,
-      weatherCode: 800,
-    };
-  }
+  const data = await validResponse.json();
+  return extractWeatherData(data);
 };

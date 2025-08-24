@@ -25,9 +25,16 @@ function Main({ weatherData, clothingItems = [], onItemClick }) {
         </p>
 
         <ul className="cards_list">
-          {filteredClothingItems.map((item) => (
-            <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
-          ))}
+          {filteredClothingItems.length > 0 ? (
+            filteredClothingItems.map((item) => (
+              <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
+            ))
+          ) : (
+            <p className="main__no-items">
+              No clothing items available for {weatherData.condition} weather.
+              Please check if the API server is running on port 3001.
+            </p>
+          )}
         </ul>
       </div>
     </main>

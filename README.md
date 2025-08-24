@@ -56,10 +56,42 @@ src/
 
 ## Installation and Setup
 
+### Option 1: Quick Start (Recommended)
+
 1. Clone the repository
 2. Install dependencies: `npm install`
-3. Start development server: `npm start`
+3. **Start both servers with one command:**
+   - **Windows:** Double-click `start-servers.bat`
+   - **Mac/Linux:** Run `./start-servers.sh` in terminal
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Option 2: Manual Start
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. **Start the mock API server** (required for clothing items):
+   ```bash
+   npm run server
+   ```
+4. **Start the React development server** (in a new terminal):
+   ```bash
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+**Important**: Both servers must be running simultaneously for the application to work properly:
+
+- React app runs on port 3000
+- Mock API server runs on port 3001
+
+### Troubleshooting
+
+If you see "No clothing items available" or console errors:
+
+1. Make sure both servers are running
+2. Check that port 3001 is not being used by another application
+3. Try stopping and restarting both servers
+4. Verify the API is working by visiting: http://localhost:3001/items
 
 ## API Configuration
 

@@ -59,7 +59,9 @@ function App() {
         setClothingItems(items);
       } catch (error) {
         console.error("Failed to fetch clothing items:", error);
-        // Keep empty array if API fails
+        // If API fails, try to use fallback data or show a message
+        console.log("Using fallback data or showing error message to user");
+        // You could set a fallback state here if needed
       }
     };
 

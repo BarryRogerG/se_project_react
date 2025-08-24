@@ -33,3 +33,16 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.main__no-items {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 100%;
+  margin: 0;
+}

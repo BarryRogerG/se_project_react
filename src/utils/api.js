@@ -1,53 +1,45 @@
 const baseUrl = "http://localhost:3001";
 
+// Helper function to handle API response and check for errors
+export const handleApiResponse = (response) => {
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(
+        "API server not found. Please make sure json-server is running on port 3001"
+      );
+    }
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response;
+};
+
 // Function to fetch all clothing items from the server
 export const getClothingItems = async () => {
-  try {
-    const response = await fetch(`${baseUrl}/items`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch clothing items:", error);
-    throw error;
-  }
+  const response = await fetch(`${baseUrl}/items`);
+  const validResponse = handleApiResponse(response);
+  const data = await validResponse.json();
+  return data;
 };
 
 // Function to add a new clothing item to the server
 export const addClothingItem = async (itemData) => {
-  try {
-    const response = await fetch(`${baseUrl}/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(itemData),
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Failed to add clothing item:", error);
-    throw error;
-  }
+  const response = await fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(itemData),
+  });
+  const validResponse = handleApiResponse(response);
+  const data = await validResponse.json();
+  return data;
 };
 
 // Function to delete a clothing item from the server
 export const deleteClothingItem = async (itemId) => {
-  try {
-    const response = await fetch(`${baseUrl}/items/${itemId}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return true; // Successfully deleted
-  } catch (error) {
-    console.error("Failed to delete clothing item:", error);
-    throw error;
-  }
+  const response = await fetch(`${baseUrl}/items/${itemId}`, {
+    method: "DELETE",
+  });
+  handleApiResponse(response);
+  return true; // Successfully deleted
 };
