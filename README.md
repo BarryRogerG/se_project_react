@@ -92,6 +92,7 @@ If you see "No clothing items available" or console errors:
 2. Check that port 3001 is not being used by another application
 3. Try stopping and restarting both servers
 4. Verify the API is working by visiting: http://localhost:3001/items
+5. Ensure `db.json` exists in the root directory with the correct `items` array structure
 
 ## API Configuration
 
