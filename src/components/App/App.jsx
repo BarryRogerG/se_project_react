@@ -92,8 +92,17 @@ function App() {
       // Add the new item to the server
       const newItem = await addClothingItem({ name, imageUrl, weather });
 
-      // Update local state with the new item from server
-      setClothingItems([newItem, ...clothingItems]);
+      // Update local state with the new item at the beginning
+      // Use functional update to avoid stale closure issues
+      setClothingItems((prevItems) => {
+        // Check if item already exists to prevent duplication
+        const itemExists = prevItems.some((item) => item.id === newItem.id);
+        if (itemExists) {
+          return prevItems; // Don't add if already exists
+        }
+        // Add new item at the beginning
+        return [newItem, ...prevItems];
+      });
 
       // Close the modal
       handleCloseModal();
@@ -108,8 +117,10 @@ function App() {
       // Delete the item from the server
       await deleteClothingItem(itemId);
 
-      // Remove the item from local state
-      setClothingItems(clothingItems.filter((item) => item.id !== itemId));
+      // Remove the item from local state using functional update
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item.id !== itemId)
+      );
 
       // Close the item modal if it's open
       if (isItemModalOpen) {

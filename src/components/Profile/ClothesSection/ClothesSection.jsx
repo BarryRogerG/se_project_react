@@ -17,12 +17,8 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
       </div>
 
       <div className="clothes-section__items">
-        {clothingItems.map((item, index) => (
-          <ItemCard
-            key={item._id || index}
-            item={item}
-            onItemClick={onItemClick}
-          />
+        {clothingItems.map((item) => (
+          <ItemCard key={item.id} item={item} onItemClick={onItemClick} />
         ))}
       </div>
     </div>
