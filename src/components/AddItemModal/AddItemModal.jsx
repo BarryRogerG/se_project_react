@@ -1,4 +1,7 @@
+// React imports
 import React, { useState, useEffect } from "react";
+
+// Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {

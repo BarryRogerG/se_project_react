@@ -2,7 +2,7 @@
   width: calc(100% - 80px);
   max-width: 1360px;
   height: 40px;
-  margin: 38px 40px 34px 40px;
+  margin: 38px auto;
   background: #fff;
   display: flex;
   align-items: center;

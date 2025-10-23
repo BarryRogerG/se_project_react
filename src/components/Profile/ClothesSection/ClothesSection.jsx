@@ -1,6 +1,11 @@
+// React imports
 import React from "react";
-import "./ClothesSection.css";
+
+// Components
 import ItemCard from "../../ItemCard/ItemCard";
+
+// Styles
+import "./ClothesSection.css";
 
 function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
   return (
@@ -18,7 +23,7 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
 
       <div className="clothes-section__items">
         {clothingItems.map((item) => (
-          <ItemCard key={item.id} item={item} onItemClick={onItemClick} />
+          <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
         ))}
       </div>
     </div>

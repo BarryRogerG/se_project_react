@@ -1,4 +1,4 @@
-const baseUrl = "/api";
+const baseUrl = "http://localhost:3001";
 
 // Helper function to handle API response and check for errors
 export const handleApiResponse = (response) => {

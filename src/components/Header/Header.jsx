@@ -1,9 +1,16 @@
+// React imports
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.css";
+
+// Components
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
+// Assets
 import logo from "../../assets/logo.svg";
 import userAvatar from "../../assets/avatar.png";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
+// Styles
+import "./Header.css";
 
 function Header({
   onAddClothesClick,

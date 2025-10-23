@@ -1,4 +1,7 @@
+// React imports
 import React from "react";
+
+// Styles
 import "./ItemModal.css";
 
 function ItemModal({ isOpen, onClose, item, onDelete }) {
@@ -28,7 +31,7 @@ function ItemModal({ isOpen, onClose, item, onDelete }) {
           <button
             type="button"
             className="item-modal__delete-btn"
-            onClick={() => onDelete(item.id)}
+            onClick={() => onDelete(item._id)}
           >
             Delete garment
           </button>

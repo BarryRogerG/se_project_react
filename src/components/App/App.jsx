@@ -1,19 +1,28 @@
+// React imports
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+
+// Components
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+
+// Utils/API
 import { fetchWeatherData } from "../../utils/weatherApi";
 import {
   getClothingItems,
   addClothingItem,
   deleteClothingItem,
 } from "../../utils/api";
+
+// Contexts
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+
+// Styles
+import "./App.css";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,7 +105,7 @@ function App() {
       // Use functional update to avoid stale closure issues
       setClothingItems((prevItems) => {
         // Check if item already exists to prevent duplication
-        const itemExists = prevItems.some((item) => item.id === newItem.id);
+        const itemExists = prevItems.some((item) => item._id === newItem._id);
         if (itemExists) {
           return prevItems; // Don't add if already exists
         }
@@ -119,7 +128,7 @@ function App() {
 
       // Remove the item from local state using functional update
       setClothingItems((prevItems) =>
-        prevItems.filter((item) => item.id !== itemId)
+        prevItems.filter((item) => item._id !== itemId)
       );
 
       // Close the item modal if it's open

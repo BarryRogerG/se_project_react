@@ -1,7 +1,12 @@
+// React imports
 import React from "react";
-import "./Profile.css";
+
+// Components
 import SideBar from "./SideBar/SideBar";
 import ClothesSection from "./ClothesSection/ClothesSection";
+
+// Styles
+import "./Profile.css";
 
 function Profile({ clothingItems, onAddItem, onItemClick }) {
   return (
