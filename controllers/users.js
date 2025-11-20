@@ -9,10 +9,21 @@ const {
   NOT_FOUND,
   CONFLICT,
   CREATED,
+  UNAUTHORIZED,
 } = require("../utils/constants");
 
 const DEFAULT_USER_ID = "5d8b8592978f8bd833ca8133";
 const DEFAULT_USER_EMAIL = "test@example.com";
+
+// GET /users - get all users
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    return res.json(users);
+  } catch (err) {
+    return next(err);
+  }
+};
 
 // GET /users/me - get current user
 const getCurrentUser = async (req, res, next) => {
@@ -30,7 +41,7 @@ const getCurrentUser = async (req, res, next) => {
   }
 };
 
-// GET /users/:userId - get user by id
+// GET /users/:userId - get user by id (legacy support for tests)
 const getUserById = async (req, res, next) => {
   try {
     const { userId } = req.params;
@@ -75,7 +86,7 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-// POST /users - create a new user
+// POST /signup - create a new user
 const createUser = async (req, res, next) => {
   try {
     const { name, avatar, email, password } = req.body;
@@ -181,9 +192,9 @@ const login = async (req, res, next) => {
 
     return res.json({ token });
   } catch (err) {
-    if (err.status === 401) {
+    if (err.status === UNAUTHORIZED) {
       return res
-        .status(err.status)
+        .status(UNAUTHORIZED)
         .json({ message: "Incorrect email or password" });
     }
     return next(err);
