@@ -1,0 +1,40 @@
+{
+  "name": "se_project_react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "nodemon index.js",
+    "server": "npx json-server --watch db.json --port 3001"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.18.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "json-server": "^1.0.0-beta.3",
+    "nodemon": "^3.1.10",
+    "vite": "^5.0.8"
+  },
+  "description": "WTWR is a weather-based clothing recommendation application that helps users choose appropriate clothing based on current weather conditions. The application fetches real-time weather data from the OpenWeatherMap API and provides personalized clothing suggestions.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarryRogerG/se_project_react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BarryRogerG/se_project_react/issues"
+  },
+  "homepage": "https://github.com/BarryRogerG/se_project_react#readme"
+}

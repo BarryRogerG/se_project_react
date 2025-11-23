@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import "../../vendor/normalize.css";
+@import "../../vendor/fonts.css";
+
+.page {
+  background-color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page__content {
+  max-width: 1360px;
+  margin: 0 auto;
+}

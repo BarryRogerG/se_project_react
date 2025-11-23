@@ -1,0 +1,87 @@
+.header {
+  width: calc(100% - 80px);
+  max-width: 1360px;
+  height: 40px;
+  margin: 38px auto;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Cabinet Grotesk", sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 0 24px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  width: 89px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.header__date-location {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__add-clothes-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 14px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.header__add-clothes-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.header__user:hover {
+  opacity: 0.8;
+}
+
+.header__username {
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+}
+
+.header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
