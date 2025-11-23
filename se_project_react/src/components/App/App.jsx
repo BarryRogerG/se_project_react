@@ -1,6 +1,6 @@
 // React imports
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 // Components
 import Header from "../Header/Header";
@@ -12,6 +12,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 // Utils/API
 import { fetchWeatherData } from "../../utils/weatherApi";
@@ -32,6 +33,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 
 function App() {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -215,6 +217,9 @@ function App() {
         
         // Close the login modal
         setIsLoginModalOpen(false);
+        
+        // Navigate to the main page
+        navigate("/");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -250,6 +255,8 @@ function App() {
     setIsLoggedIn(false);
     // Clear user data
     setUser(null);
+    // Navigate to the main page
+    navigate("/");
   };
 
   // Handle opening edit profile modal
@@ -339,17 +346,16 @@ function App() {
           <Route
             path="/profile"
             element={
-              user ? (
+              <ProtectedRoute>
                 <Profile
                   clothingItems={clothingItems}
                   onAddItem={handleAddClothesClick}
                   onItemClick={handleItemClick}
                   onEditProfile={handleEditProfileClick}
                   onSignOut={handleSignOut}
+                  onCardLike={handleCardLike}
                 />
-              ) : (
-                <Navigate to="/" replace />
-              )
+              </ProtectedRoute>
             }
           />
         </Routes>

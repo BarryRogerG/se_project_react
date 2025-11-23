@@ -1,38 +1,32 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 // Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
-  // declare state for each input field
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// Hooks
+import { useForm } from "../../hooks/useForm";
 
-  // use a useEffect hook to reset the input field state to empty
-  // when the modal is opened
+const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
+  // Use the useForm hook to manage form state
+  const { values, handleChange, resetForm } = useForm({
+    email: "",
+    password: "",
+  });
+
+  // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
-      setEmail("");
-      setPassword("");
+      resetForm();
     }
-  }, [isOpen]);
-
-  // create onChange handlers corresponding to each state variable
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  }, [isOpen, resetForm]);
 
   // handleSubmit calls onLogin with form data
   function handleSubmit(e) {
     // prevent default behavior
     e.preventDefault();
     // call onLogin with appropriate arguments
-    onLogin({ email, password });
+    onLogin(values);
   }
 
   return (
@@ -46,33 +40,33 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
     >
       {/* the contents of the form will go in here */}
       <div className="modal__input-group">
-        <label htmlFor="email" className="modal__label">
+        <label htmlFor="login-email" className="modal__label">
           Email
         </label>
         <input
           type="email"
-          id="email"
+          id="login-email"
           name="email"
           className="modal__input"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={values.email || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="password" className="modal__label">
+        <label htmlFor="login-password" className="modal__label">
           Password
         </label>
         <input
           type="password"
-          id="password"
+          id="login-password"
           name="password"
           className="modal__input"
           placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={values.password || ""}
+          onChange={handleChange}
           required
         />
       </div>

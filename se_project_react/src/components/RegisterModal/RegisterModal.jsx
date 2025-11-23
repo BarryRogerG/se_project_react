@@ -1,50 +1,34 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 // Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
-  // declare state for each input field
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// Hooks
+import { useForm } from "../../hooks/useForm";
 
-  // use a useEffect hook to reset the input field state to empty
-  // when the modal is opened
+const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
+  // Use the useForm hook to manage form state
+  const { values, handleChange, resetForm } = useForm({
+    name: "",
+    avatar: "",
+    email: "",
+    password: "",
+  });
+
+  // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setAvatar("");
-      setEmail("");
-      setPassword("");
+      resetForm();
     }
-  }, [isOpen]);
-
-  // create onChange handlers corresponding to each state variable
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleAvatarChange = (e) => {
-    setAvatar(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  }, [isOpen, resetForm]);
 
   // handleSubmit calls onRegister with form data
   function handleSubmit(e) {
     // prevent default behavior
     e.preventDefault();
     // call onRegister with appropriate arguments
-    onRegister({ name, avatar, email, password });
+    onRegister(values);
   }
 
   return (
@@ -58,65 +42,65 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
     >
       {/* the contents of the form will go in here */}
       <div className="modal__input-group">
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="register-name" className="modal__label">
           Name
         </label>
         <input
           type="text"
-          id="name"
+          id="register-name"
           name="name"
           className="modal__input"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="avatar" className="modal__label">
+        <label htmlFor="register-avatar" className="modal__label">
           Avatar URL
         </label>
         <input
           type="url"
-          id="avatar"
+          id="register-avatar"
           name="avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          value={avatar}
-          onChange={handleAvatarChange}
+          value={values.avatar || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="email" className="modal__label">
+        <label htmlFor="register-email" className="modal__label">
           Email
         </label>
         <input
           type="email"
-          id="email"
+          id="register-email"
           name="email"
           className="modal__input"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={values.email || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="password" className="modal__label">
+        <label htmlFor="register-password" className="modal__label">
           Password
         </label>
         <input
           type="password"
-          id="password"
+          id="register-password"
           name="password"
           className="modal__input"
           placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          value={values.password || ""}
+          onChange={handleChange}
           required
         />
       </div>

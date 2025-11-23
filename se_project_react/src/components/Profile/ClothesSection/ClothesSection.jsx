@@ -10,7 +10,7 @@ import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 // Styles
 import "./ClothesSection.css";
 
-function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
+function ClothesSection({ clothingItems, onAddItem, onItemClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Filter items to show only those added by the current user
@@ -33,7 +33,12 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
 
       <div className="clothes-section__items">
         {userItems.map((item) => (
-          <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
+          <ItemCard
+            key={item._id}
+            item={item}
+            onItemClick={onItemClick}
+            onCardLike={onCardLike}
+          />
         ))}
       </div>
     </div>

@@ -1,12 +1,6 @@
-const baseUrl = "http://localhost:3001";
+import { handleApiResponse } from "./api.js";
 
-// Helper function to handle API response and check for errors
-const handleApiResponse = (response) => {
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  return response;
-};
+const baseUrl = "http://localhost:3001";
 
 // POST /signup for user registration
 export const signup = async ({ name, avatar, email, password }) => {

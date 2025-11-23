@@ -1,5 +1,5 @@
 // React imports
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 // Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
@@ -7,37 +7,34 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 // Contexts
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
+// Hooks
+import { useForm } from "../../hooks/useForm";
+
 const EditProfileModal = ({ isOpen, onEditProfile, onCloseModal }) => {
   const currentUser = useContext(CurrentUserContext);
   
-  // declare state for each input field
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  // Use the useForm hook to manage form state
+  const { values, handleChange, setFormValues } = useForm({
+    name: "",
+    avatar: "",
+  });
 
-  // use a useEffect hook to populate the form with current user data
-  // when the modal is opened or currentUser changes
+  // Populate form with current user data when modal opens
   useEffect(() => {
     if (isOpen && currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+      setFormValues({
+        name: currentUser.name || "",
+        avatar: currentUser.avatar || "",
+      });
     }
-  }, [isOpen, currentUser]);
-
-  // create onChange handlers corresponding to each state variable
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleAvatarChange = (e) => {
-    setAvatar(e.target.value);
-  };
+  }, [isOpen, currentUser, setFormValues]);
 
   // handleSubmit calls onEditProfile with form data
   function handleSubmit(e) {
     // prevent default behavior
     e.preventDefault();
     // call onEditProfile with appropriate arguments
-    onEditProfile({ name, avatar });
+    onEditProfile(values);
   }
 
   return (
@@ -51,33 +48,33 @@ const EditProfileModal = ({ isOpen, onEditProfile, onCloseModal }) => {
     >
       {/* the contents of the form will go in here */}
       <div className="modal__input-group">
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="editProfile-name" className="modal__label">
           Name
         </label>
         <input
           type="text"
-          id="name"
+          id="editProfile-name"
           name="name"
           className="modal__input"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="avatar" className="modal__label">
+        <label htmlFor="editProfile-avatar" className="modal__label">
           Avatar URL
         </label>
         <input
           type="url"
-          id="avatar"
+          id="editProfile-avatar"
           name="avatar"
           className="modal__input"
           placeholder="Avatar URL"
-          value={avatar}
-          onChange={handleAvatarChange}
+          value={values.avatar || ""}
+          onChange={handleChange}
           required
         />
       </div>
