@@ -1,13 +1,23 @@
 // React imports
-import React from "react";
+import React, { useContext } from "react";
 
 // Components
 import ItemCard from "../../ItemCard/ItemCard";
 
+// Contexts
+import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
+
 // Styles
 import "./ClothesSection.css";
 
-function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
+function ClothesSection({ clothingItems, onAddItem, onItemClick, onCardLike }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  // Filter items to show only those added by the current user
+  const userItems = clothingItems.filter(
+    (item) => item.owner === currentUser?._id
+  );
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -22,8 +32,13 @@ function ClothesSection({ clothingItems, onAddItem, onItemClick }) {
       </div>
 
       <div className="clothes-section__items">
-        {clothingItems.map((item) => (
-          <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
+        {userItems.map((item) => (
+          <ItemCard
+            key={item._id}
+            item={item}
+            onItemClick={onItemClick}
+            onCardLike={onCardLike}
+          />
         ))}
       </div>
     </div>

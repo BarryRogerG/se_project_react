@@ -98,6 +98,11 @@ If you see "No clothing items available" or console errors:
 
 The application uses the OpenWeatherMap API with coordinates set for Tel Aviv-Yafo, Israel. The API key and coordinates are configured in `src/utils/constants.js`.
 
+## Backend Repository
+
+The backend API server for this project is available at:
+- [Backend Repository](https://github.com/BarryRogerG/se_project_express)
+
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)

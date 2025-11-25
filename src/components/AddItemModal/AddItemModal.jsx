@@ -1,48 +1,33 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 // Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
-  // declare state for each input field
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
+// Hooks
+import { useForm } from "../../hooks/useForm";
 
-  // use a useEffect hook to reset the input field state to empty
-  // when the modal is opened
+const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
+  // Use the useForm hook to manage form state
+  const { values, handleChange, resetForm } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
+
+  // Reset form when modal opens
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
+      resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
-  // create onChange handlers corresponding to each state variable
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-
-  const handleWeatherChange = (e) => {
-    setWeather(e.target.value);
-  };
-
-  // onAddItem refers to handleAddItemSubmit, which is declared in
-  // declare state for each input field
-  // use a useEffect hook to reset the input field state to empty
-  // the modal is opened
-  // create onChange handlers corresponding to each state variabl
+  // handleSubmit calls onAddItem with form data
   function handleSubmit(e) {
     // prevent default behavior
     e.preventDefault();
     // call onAddItem with appropriate arguments
-    onAddItem({ name, imageUrl, weather });
+    onAddItem(values);
   }
 
   return (
@@ -56,33 +41,33 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
     >
       {/* the contents of the form will go in here */}
       <div className="modal__input-group">
-        <label htmlFor="name" className="modal__label">
+        <label htmlFor="addItem-name" className="modal__label">
           Name
         </label>
         <input
           type="text"
-          id="name"
+          id="addItem-name"
           name="name"
           className="modal__input"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={values.name || ""}
+          onChange={handleChange}
           required
         />
       </div>
 
       <div className="modal__input-group">
-        <label htmlFor="imageUrl" className="modal__label">
+        <label htmlFor="addItem-imageUrl" className="modal__label">
           Image
         </label>
         <input
           type="url"
-          id="imageUrl"
+          id="addItem-imageUrl"
           name="imageUrl"
           className="modal__input"
           placeholder="Image URL"
-          value={imageUrl}
-          onChange={handleImageUrlChange}
+          value={values.imageUrl || ""}
+          onChange={handleChange}
           required
         />
       </div>
@@ -95,8 +80,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
               type="radio"
               name="weather"
               value="hot"
-              checked={weather === "hot"}
-              onChange={handleWeatherChange}
+              checked={values.weather === "hot"}
+              onChange={handleChange}
               className="modal__radio"
             />
             <span className="modal__radio-text">Hot</span>
@@ -107,8 +92,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
               type="radio"
               name="weather"
               value="warm"
-              checked={weather === "warm"}
-              onChange={handleWeatherChange}
+              checked={values.weather === "warm"}
+              onChange={handleChange}
               className="modal__radio"
             />
             <span className="modal__radio-text">Warm</span>
@@ -119,8 +104,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
               type="radio"
               name="weather"
               value="cold"
-              checked={weather === "cold"}
-              onChange={handleWeatherChange}
+              checked={values.weather === "cold"}
+              onChange={handleChange}
               className="modal__radio"
             />
             <span className="modal__radio-text">Cold</span>

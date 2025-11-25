@@ -8,14 +8,15 @@ import ClothesSection from "./ClothesSection/ClothesSection";
 // Styles
 import "./Profile.css";
 
-function Profile({ clothingItems, onAddItem, onItemClick }) {
+function Profile({ clothingItems, onAddItem, onItemClick, onEditProfile, onSignOut, onCardLike }) {
   return (
     <div className="profile">
-      <SideBar />
+      <SideBar onEditProfile={onEditProfile} onSignOut={onSignOut} />
       <ClothesSection
         clothingItems={clothingItems}
         onAddItem={onAddItem}
         onItemClick={onItemClick}
+        onCardLike={onCardLike}
       />
     </div>
   );

@@ -21,13 +21,25 @@ export const getClothingItems = async () => {
   return data;
 };
 
+// Helper function to get token from localStorage
+const getToken = () => {
+  return localStorage.getItem("jwt");
+};
+
 // Function to add a new clothing item to the server
 export const addClothingItem = async (itemData) => {
+  const token = getToken();
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+  
   const response = await fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify(itemData),
   });
   const validResponse = handleApiResponse(response);
@@ -37,9 +49,53 @@ export const addClothingItem = async (itemData) => {
 
 // Function to delete a clothing item from the server
 export const deleteClothingItem = async (itemId) => {
+  const token = getToken();
+  const headers = {};
+  
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+  
   const response = await fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
+    headers,
   });
   handleApiResponse(response);
   return true; // Successfully deleted
+};
+
+// Function to add a like to a clothing item
+export const addCardLike = async (itemId, token) => {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+  
+  const response = await fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers,
+  });
+  const validResponse = handleApiResponse(response);
+  const data = await validResponse.json();
+  return data;
+};
+
+// Function to remove a like from a clothing item
+export const removeCardLike = async (itemId, token) => {
+  const headers = {};
+  
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+  
+  const response = await fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers,
+  });
+  const validResponse = handleApiResponse(response);
+  const data = await validResponse.json();
+  return data;
 };

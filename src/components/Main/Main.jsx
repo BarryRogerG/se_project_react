@@ -11,7 +11,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 // Styles
 import "./Main.css";
 
-function Main({ weatherData, clothingItems = [], onItemClick }) {
+function Main({ weatherData, clothingItems = [], onItemClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   // Filter clothing items based on current weather type
@@ -34,7 +34,12 @@ function Main({ weatherData, clothingItems = [], onItemClick }) {
         <ul className="cards_list">
           {filteredClothingItems.length > 0 ? (
             filteredClothingItems.map((item) => (
-              <ItemCard key={item._id} item={item} onItemClick={onItemClick} />
+              <ItemCard
+                key={item._id}
+                item={item}
+                onItemClick={onItemClick}
+                onCardLike={onCardLike}
+              />
             ))
           ) : (
             <p className="main__no-items">
