@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__content">
         <p className="footer__copyright">
-          © {currentYear} Your Name. All rights reserved.
+          © {currentYear} Barry Roger Goldberg. All rights reserved.
         </p>
         <div className="footer__links">
           <a href="#" className="footer__link">
