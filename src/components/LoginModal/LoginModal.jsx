@@ -19,7 +19,8 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
     if (isOpen) {
       resetForm();
     }
-  }, [isOpen, resetForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   // handleSubmit calls onLogin with form data
   function handleSubmit(e) {
@@ -50,7 +51,10 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
           className="modal__input"
           placeholder="Email"
           value={values.email || ""}
-          onChange={handleChange}
+          onChange={(e) => {
+            console.log('Input changed:', e.target.name, e.target.value);
+            handleChange(e);
+          }}
           required
         />
       </div>
@@ -66,7 +70,10 @@ const LoginModal = ({ isOpen, onLogin, onCloseModal }) => {
           className="modal__input"
           placeholder="Password"
           value={values.password || ""}
-          onChange={handleChange}
+          onChange={(e) => {
+            console.log('Input changed:', e.target.name, e.target.value);
+            handleChange(e);
+          }}
           required
         />
       </div>

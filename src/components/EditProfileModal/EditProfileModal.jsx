@@ -27,7 +27,8 @@ const EditProfileModal = ({ isOpen, onEditProfile, onCloseModal }) => {
         avatar: currentUser.avatar || "",
       });
     }
-  }, [isOpen, currentUser, setFormValues]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, currentUser]);
 
   // handleSubmit calls onEditProfile with form data
   function handleSubmit(e) {

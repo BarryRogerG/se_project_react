@@ -20,7 +20,8 @@ const AddItemModal = ({ isOpen, onAddItem, onCloseModal }) => {
     if (isOpen) {
       resetForm();
     }
-  }, [isOpen, resetForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   // handleSubmit calls onAddItem with form data
   function handleSubmit(e) {

@@ -21,7 +21,8 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
     if (isOpen) {
       resetForm();
     }
-  }, [isOpen, resetForm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   // handleSubmit calls onRegister with form data
   function handleSubmit(e) {
@@ -52,7 +53,16 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
           className="modal__input"
           placeholder="Name"
           value={values.name || ""}
-          onChange={handleChange}
+          onChange={(e) => {
+            console.log('Input changed:', e.target.name, e.target.value);
+            handleChange(e);
+          }}
+          onFocus={(e) => {
+            console.log('Input focused:', e.target.name);
+          }}
+          onClick={(e) => {
+            console.log('Input clicked:', e.target.name);
+          }}
           autoComplete="name"
           required
         />

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 /**
  * Custom hook for managing form state
@@ -6,11 +6,27 @@ import { useState, useCallback } from "react";
  * @returns {Object} Form values, handlers, and reset function
  */
 export const useForm = (initialValues = {}) => {
+  // Use ref to store initial values to avoid infinite loops
+  const initialValuesRef = useRef(initialValues);
+  
+  // Update ref when initialValues change (but only if the object reference changes)
+  if (initialValuesRef.current !== initialValues) {
+    initialValuesRef.current = initialValues;
+  }
+  
   const [values, setValues] = useState(initialValues);
 
   // Handle input change
   const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
+    const target = e.target;
+    if (!target) return;
+    
+    const { name, value } = target;
+    if (!name) {
+      console.warn('Input element missing name attribute:', target);
+      return;
+    }
+    
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
@@ -19,8 +35,8 @@ export const useForm = (initialValues = {}) => {
 
   // Reset form to initial values
   const resetForm = useCallback(() => {
-    setValues(initialValues);
-  }, [initialValues]);
+    setValues(initialValuesRef.current);
+  }, []);
 
   // Set form values manually (useful for setting initial values)
   const setFormValues = useCallback((newValues) => {
