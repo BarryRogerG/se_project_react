@@ -53,6 +53,7 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
           placeholder="Name"
           value={values.name || ""}
           onChange={handleChange}
+          autoComplete="name"
           required
         />
       </div>
@@ -69,6 +70,7 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
           placeholder="Avatar URL"
           value={values.avatar || ""}
           onChange={handleChange}
+          autoComplete="photo"
           required
         />
       </div>
@@ -85,6 +87,7 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
           placeholder="Email"
           value={values.email || ""}
           onChange={handleChange}
+          autoComplete="email"
           required
         />
       </div>
@@ -101,6 +104,7 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
           placeholder="Password"
           value={values.password || ""}
           onChange={handleChange}
+          autoComplete="new-password"
           required
         />
       </div>

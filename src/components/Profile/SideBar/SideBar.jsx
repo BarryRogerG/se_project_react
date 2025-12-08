@@ -24,14 +24,14 @@ function SideBar({ onEditProfile, onSignOut }) {
       </div>
       <button
         type="button"
-        className="sidebar__edit-button"
+        className="sidebar__link"
         onClick={onEditProfile}
       >
         Change profile data
       </button>
       <button
         type="button"
-        className="sidebar__signout-button"
+        className="sidebar__link"
         onClick={onSignOut}
       >
         Sign out

@@ -1,6 +1,8 @@
 import { handleApiResponse } from "./api.js";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.NODE_ENV === "production"
+  ? "http://api.bestbudwtwr.ignorelist.com"
+  : "http://localhost:3001";
 
 // POST /signup for user registration
 export const signup = async ({ name, avatar, email, password }) => {
