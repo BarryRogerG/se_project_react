@@ -34,7 +34,7 @@ function SideBar({ onEditProfile, onSignOut }) {
         className="sidebar__link"
         onClick={onSignOut}
       >
-        Sign out
+        Log out
       </button>
     </div>
   );
