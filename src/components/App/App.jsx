@@ -33,6 +33,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 
 function App() {
+  console.log('App component rendering');
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
