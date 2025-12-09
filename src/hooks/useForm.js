@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 /**
  * Custom hook for managing form state
@@ -9,17 +9,21 @@ export const useForm = (initialValues = {}) => {
   // Use ref to store initial values to avoid infinite loops
   const initialValuesRef = useRef(initialValues);
   
-  // Update ref when initialValues change (but only if the object reference changes)
-  if (initialValuesRef.current !== initialValues) {
+  // Update ref when initialValues change
+  useEffect(() => {
     initialValuesRef.current = initialValues;
-  }
+  }, [initialValues]);
   
   const [values, setValues] = useState(initialValues);
 
   // Handle input change
   const handleChange = useCallback((e) => {
+    console.log('useForm handleChange called', e);
     const target = e.target;
-    if (!target) return;
+    if (!target) {
+      console.warn('useForm: No target in event', e);
+      return;
+    }
     
     const { name, value } = target;
     if (!name) {
@@ -27,10 +31,15 @@ export const useForm = (initialValues = {}) => {
       return;
     }
     
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    console.log('useForm: Updating', name, 'to', value);
+    setValues((prevValues) => {
+      const newValues = {
+        ...prevValues,
+        [name]: value,
+      };
+      console.log('useForm: New values', newValues);
+      return newValues;
+    });
   }, []);
 
   // Reset form to initial values

@@ -8,6 +8,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
 const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
+  console.log('RegisterModal rendering, isOpen:', isOpen);
+  
   // Use the useForm hook to manage form state
   const { values, handleChange, resetForm } = useForm({
     name: "",
@@ -15,6 +17,9 @@ const RegisterModal = ({ isOpen, onRegister, onCloseModal }) => {
     email: "",
     password: "",
   });
+  
+  console.log('RegisterModal values:', values);
+  console.log('RegisterModal handleChange:', handleChange);
 
   // Reset form when modal opens
   useEffect(() => {
