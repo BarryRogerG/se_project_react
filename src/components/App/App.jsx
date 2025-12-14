@@ -95,8 +95,14 @@ function App() {
     }
   }, []);
 
-  // Fetch clothing items from server when component mounts
+  // Fetch clothing items from server when component mounts and user is logged in
   useEffect(() => {
+    // Only fetch items if user is logged in
+    if (!isLoggedIn) {
+      setClothingItems([]);
+      return;
+    }
+
     const fetchClothingItems = async () => {
       try {
         const items = await getClothingItems();
@@ -110,7 +116,7 @@ function App() {
     };
 
     fetchClothingItems();
-  }, []);
+  }, [isLoggedIn]);
 
   const handleAddClothesClick = () => {
     setIsModalOpen(true);
