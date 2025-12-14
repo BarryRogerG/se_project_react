@@ -256,6 +256,8 @@ function App() {
     setIsLoggedIn(false);
     // Clear user data
     setUser(null);
+    // Clear clothing items
+    setClothingItems([]);
     // Navigate to the main page
     navigate("/");
   };
