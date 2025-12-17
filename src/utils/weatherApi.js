@@ -84,8 +84,10 @@ const extractWeatherData = (apiResponse) => {
 };
 
 // Main function to fetch weather data
-export const fetchWeatherData = async () => {
-  const { latitude, longitude } = WEATHER_COORDS;
+// Accepts optional coordinates, falls back to default if not provided
+export const fetchWeatherData = async (coordinates = null) => {
+  const coords = coordinates || WEATHER_COORDS;
+  const { latitude, longitude } = coords;
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${WEATHER_API_KEY}`;
 
   const response = await fetch(url);

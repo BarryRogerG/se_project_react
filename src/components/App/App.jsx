@@ -58,7 +58,29 @@ function App() {
   useEffect(() => {
     const getWeatherData = async () => {
       try {
-        const weather = await fetchWeatherData();
+        // Try to get user's location first
+        let coordinates = null;
+        
+        if (navigator.geolocation) {
+          coordinates = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                resolve({
+                  latitude: position.coords.latitude.toString(),
+                  longitude: position.coords.longitude.toString(),
+                });
+              },
+              (error) => {
+                console.log("Geolocation error:", error.message);
+                // If geolocation fails, use default coordinates
+                resolve(null);
+              }
+            );
+          });
+        }
+
+        // Fetch weather data with user's location or default coordinates
+        const weather = await fetchWeatherData(coordinates);
         setWeatherData({
           temperature: weather.temperature,
           location: weather.city,
