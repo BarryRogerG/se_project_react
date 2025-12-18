@@ -1,7 +1,7 @@
 import { handleApiResponse } from "./api.js";
 
 const baseUrl = process.env.NODE_ENV === "production"
-  ? "https://api.bestbudwtwr.ignorelist.com"
+  ? "http://34.134.30.14:3001"
   : "http://localhost:3001";
 
 // POST /signup for user registration

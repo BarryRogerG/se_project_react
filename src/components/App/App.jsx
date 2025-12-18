@@ -15,7 +15,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 // Utils/API
-import { fetchWeatherData } from "../../utils/weatherApi";
+import { fetchWeatherData, getLocationFromIP } from "../../utils/weatherApi";
 import {
   getClothingItems,
   addClothingItem,
@@ -70,13 +70,17 @@ function App() {
                   longitude: position.coords.longitude.toString(),
                 });
               },
-              (error) => {
+              async (error) => {
                 console.log("Geolocation error:", error.message);
-                // If geolocation fails, use default coordinates
-                resolve(null);
+                // If geolocation fails, try IP-based location
+                const ipCoords = await getLocationFromIP();
+                resolve(ipCoords);
               }
             );
           });
+        } else {
+          // If geolocation not available, try IP-based location
+          coordinates = await getLocationFromIP();
         }
 
         // Fetch weather data with user's location or default coordinates

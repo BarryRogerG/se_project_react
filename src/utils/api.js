@@ -1,5 +1,5 @@
 const baseUrl = process.env.NODE_ENV === "production"
-  ? "https://api.bestbudwtwr.ignorelist.com"
+  ? "http://34.134.30.14:3001"
   : "http://localhost:3001";
 
 // Helper function to handle API response and check for errors

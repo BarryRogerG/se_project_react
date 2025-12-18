@@ -83,6 +83,26 @@ const extractWeatherData = (apiResponse) => {
   };
 };
 
+// Function to get location from IP address (fallback when geolocation fails)
+const getLocationFromIP = async () => {
+  try {
+    // Using free IP geolocation service
+    const response = await fetch('https://ipapi.co/json/');
+    if (!response.ok) throw new Error('IP location failed');
+    const data = await response.json();
+    
+    if (data.latitude && data.longitude) {
+      return {
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString(),
+      };
+    }
+  } catch (error) {
+    console.log('IP-based location failed:', error.message);
+  }
+  return null;
+};
+
 // Main function to fetch weather data
 // Accepts optional coordinates, falls back to default if not provided
 export const fetchWeatherData = async (coordinates = null) => {
@@ -96,3 +116,6 @@ export const fetchWeatherData = async (coordinates = null) => {
   const data = await validResponse.json();
   return extractWeatherData(data);
 };
+
+// Export the IP location function
+export { getLocationFromIP };
