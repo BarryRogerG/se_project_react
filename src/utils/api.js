@@ -1,4 +1,5 @@
-const baseUrl = process.env.NODE_ENV === "production"
+// Use Vite's environment detection
+const baseUrl = import.meta.env.PROD
   ? "https://api.bestbudwtwr.ignorelist.com"
   : "http://localhost:3001";
 
