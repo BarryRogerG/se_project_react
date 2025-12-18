@@ -85,21 +85,64 @@ const extractWeatherData = (apiResponse) => {
 
 // Function to get location from IP address (fallback when geolocation fails)
 const getLocationFromIP = async () => {
-  try {
-    // Using free IP geolocation service
-    const response = await fetch('https://ipapi.co/json/');
-    if (!response.ok) throw new Error('IP location failed');
-    const data = await response.json();
-    
-    if (data.latitude && data.longitude) {
-      return {
+  console.log('Attempting IP-based location...');
+  
+  // Try multiple IP geolocation services
+  const services = [
+    {
+      url: 'https://ipapi.co/json/',
+      parser: (data) => data.latitude && data.longitude ? {
         latitude: data.latitude.toString(),
         longitude: data.longitude.toString(),
-      };
+      } : null
+    },
+    {
+      url: 'https://ipgeolocation.io/json/',
+      parser: (data) => data.latitude && data.longitude ? {
+        latitude: data.latitude.toString(),
+        longitude: data.longitude.toString(),
+      } : null
+    },
+    {
+      url: 'http://ip-api.com/json/?fields=status,lat,lon',
+      parser: (data) => data.status === 'success' && data.lat && data.lon ? {
+        latitude: data.lat.toString(),
+        longitude: data.lon.toString(),
+      } : null
     }
-  } catch (error) {
-    console.log('IP-based location failed:', error.message);
+  ];
+
+  for (const service of services) {
+    try {
+      console.log(`Trying IP service: ${service.url}`);
+      const response = await fetch(service.url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+      
+      if (!response.ok) {
+        console.log(`Service ${service.url} returned status: ${response.status}`);
+        continue;
+      }
+      
+      const data = await response.json();
+      const coords = service.parser(data);
+      
+      if (coords) {
+        console.log('IP-based location successful:', coords);
+        return coords;
+      } else {
+        console.log(`Service ${service.url} returned invalid data`);
+      }
+    } catch (error) {
+      console.log(`Service ${service.url} failed:`, error.message);
+      continue;
+    }
   }
+  
+  console.warn('All IP geolocation services failed, falling back to default location');
   return null;
 };
 
